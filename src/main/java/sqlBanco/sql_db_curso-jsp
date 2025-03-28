@@ -1,0 +1,115 @@
+select * from model_login
+
+CREATE TABLE model_login
+(
+  id SERIAL NOT NULL,
+  login VARCHAR(200) NOT NULL,
+  senha VARCHAR(200) NOT NULL,
+  nome VARCHAR(300) NOT NULL,
+  email VARCHAR(300) NOT NULL,
+  useradmin BOOLEAN DEFAULT FALSE,
+  usuario_id BIGINT NOT NULL DEFAULT 1,
+  perfil VARCHAR(200)
+);
+
+ 
+ALTER TABLE model_login
+  ADD CONSTRAINT model_login_pkey PRIMARY KEY (id);
+
+  ALTER TABLE model_login
+  ADD CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
+      REFERENCES public.model_login (id)
+
+ALTER TABLE public.model_login
+  ADD CONSTRAINT login_unique UNIQUE (login);
+
+INSERT INTO model_login (login, senha, nome, email, useradmin, usuario_id, perfil)
+VALUES
+  ('admin', 'Manaus10', 'Jorge Luis', 'jorgeluis@example.com', true,1, 'ADMINISTRADOR');
+
+  INSERT INTO public.model_login (login, senha, nome, email, useradmin, usuario_id, perfil)
+VALUES
+  ('ana.souza', 'senha123', 'Ana Souza', 'ana.souza@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('bruno.almeida', 'senha123', 'Bruno Almeida', 'bruno.almeida@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('carla.oliveira', 'senha123', 'Carla Oliveira', 'carla.oliveira@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('diego.pereira', 'senha123', 'Diego Pereira', 'diego.pereira@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('eliane.costa', 'senha123', 'Eliane Costa', 'eliane.costa@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('felipe.lima', 'senha123', 'Felipe Lima', 'felipe.lima@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('gabriela.martins', 'senha123', 'Gabriela Martins', 'gabriela.martins@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('henrique.rocha', 'senha123', 'Henrique Rocha', 'henrique.rocha@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('isabela.pereira', 'senha123', 'Isabela Pereira', 'isabela.pereira@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('joao.santos', 'senha123', 'João Santos', 'joao.santos@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('karine.silva', 'senha123', 'Karine Silva', 'karine.silva@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('lucas.lima', 'senha123', 'Lucas Lima', 'lucas.lima@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('mariana.costa', 'senha123', 'Mariana Costa', 'mariana.costa@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('natan.ferreira', 'senha123', 'Natan Ferreira', 'natan.ferreira@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('olga.gomes', 'senha123', 'Olga Gomes', 'olga.gomes@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('paulo.henrique', 'senha123', 'Paulo Henrique', 'paulo.henrique@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('quesia.martins', 'senha123', 'Quésia Martins', 'quesia.martins@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('rafael.souza', 'senha123', 'Rafael Souza', 'rafael.souza@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('sofia.almeida', 'senha123', 'Sofia Almeida', 'sofia.almeida@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('tiago.barbosa', 'senha123', 'Tiago Barbosa', 'tiago.barbosa@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('ursula.mendes', 'senha123', 'Ursula Mendes', 'ursula.mendes@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('victor.silva', 'senha123', 'Victor Silva', 'victor.silva@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('walter.costa', 'senha123', 'Walter Costa', 'walter.costa@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('ximena.oliveira', 'senha123', 'Ximena Oliveira', 'ximena.oliveira@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('yara.ferreira', 'senha123', 'Yara Ferreira', 'yara.ferreira@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('ze.carlos', 'senha123', 'Zé Carlos', 'ze.carlos@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('alice.rocha', 'senha123', 'Alice Rocha', 'alice.rocha@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('beto.lima', 'senha123', 'Beto Lima', 'beto.lima@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('clara.barbosa', 'senha123', 'Clara Barbosa', 'clara.barbosa@example.com', false, currval('model_login_id_seq'), 'AUXILIAR'),
+  ('danilo.santos', 'senha123', 'Danilo Santos', 'danilo.santos@example.com', false, currval('model_login_id_seq'), 'AUXILIAR');
+
+  UPDATE model_login SET usuario_id = 1;
+  
+  UPDATE model_login SET useradmin = FALSE WHERE id = 32;
+
+  ALTER TABLE model_login ADD COLUMN sexo character varying(10);    
+
+
+UPDATE model_login
+SET sexo = CASE
+    WHEN nome IN ('Ana Souza', 'Carla Oliveira', 'Eliane Costa', 'Gabriela Martins', 'Isabela Pereira', 'Karine Silva', 'Mariana Costa', 'Olga Gomes', 'Quésia Martins', 'Sofia Almeida', 'Ursula Mendes', 'Ximena Oliveira', 'Yara Ferreira', 'Alice Rocha', 'Clara Barbosa') THEN 'FEMININO'
+    WHEN nome IN ('Bruno Almeida', 'Diego Pereira', 'Felipe Lima', 'Henrique Rocha', 'João Santos', 'Lucas Lima', 'Natan Ferreira', 'Paulo Henrique', 'Rafael Souza', 'Tiago Barbosa', 'Victor Silva', 'Walter Costa', 'Zé Carlos', 'Beto Lima', 'Danilo Santos') THEN 'MASCULINO'
+    ELSE 'MASCULINO' -- Default case, in case there are unclassified names
+END;
+
+alter table model_login add column fotouser text;
+alter table model_login add column extensaofotouser character varying(10);
+
+select * from model_login where usuario_id = 1 order by nome offset 0 limit 5
+
+ALTER TABLE model_login ADD COLUMN cep character varying(250);  
+ALTER TABLE model_login ADD COLUMN logradouro character varying(250);  
+ALTER TABLE model_login ADD COLUMN bairro character varying(250);  
+ALTER TABLE model_login ADD COLUMN localidade character varying(250);  
+ALTER TABLE model_login ADD COLUMN uf character varying(250);  
+ALTER TABLE model_login ADD COLUMN numero character varying(250);  
+ALTER TABLE model_login ADD COLUMN datanascimento DATE;
+ALTER TABLE model_login ADD COLUMN rendamensal double precision;
+
+select nome, avg(rendamensal) as media_salarial, perfil from model_login where usuario_id = 1 group by perfil, nome
+
+
+CREATE SEQUENCE public.versionadorbanco_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+
+CREATE TABLE public.versionadorbanco
+(
+  id integer NOT NULL DEFAULT nextval('versionadorbanco_seq'::regclass),
+  arquivo_sql character varying(50) NOT NULL,
+  constraint id_pk primary key(id)
+ 
+)
+
+INSERT INTO versionadorbanco(arquivo_sql) VALUES (?);
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+CREATE TABLE model_login
+(
+  id integer NOT NULL DEFAULT nextval('model_login_id_seq'::regclass),
+  login character varying(200) NOT NULL,
+  senha character varying(200) NOT NULL,
+  nome character varying(300) NOT NULL,
+  email character varying(300) NOT NULL,
+  useradmin boolean DEFAULT false,
+  usuario_id bigint NOT NULL DEFAULT 1,
+  perfil character varying(200),
+  CONSTRAINT model_login_pkey PRIMARY KEY (id),
+  CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
+      REFERENCES public.model_login (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT login_unique UNIQUE (login)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.model_login
+  OWNER TO postgres;
